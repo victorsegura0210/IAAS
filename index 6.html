@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-title" content="IAAS"/>
+<meta name="theme-color" content="#0A0E14"/>
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAADSUlEQVR4nO3cwakcRxRAUX3hlRZa/TC0cRYCxeGoFIdAWXijMBSEF4KPMDaIf6te1aBzAphpqu687hmm++nd++c38FpvTx8Aj01AJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiCSP04fwP96/vDp9CHc5fu3L6cP4T88XXVjoWh+0T0xXRGQbl7teEmHA5LOEgczOhaQdJY7ktGZb2Hq2eHIqk5PIOkMmBxFoxNIPTMm13kuIPVMGlvtoYDUM29mzScCUs8pAyu/PSD1nLV7/fcGpJ4bbN2FjQGp5x779sLfOUh2BWT83GbTjmwJSD132rEvTmEk6wMyfm62fHdMIJLFARk/91u7RyYQiYBIVgbk/PUoFu7UvfeFDfj76+dVL/Xnx79WvdRjcQojERDJsoBcAD2WVftlApEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgkuuekbjwuYWTJg/7qucxmkAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiI5LobCyfvmlt4N+BVN/tNMoFIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREMmygL5/+7LqpRiwar9MIBIBkVz3jMRJv+2DDRdaOYFcBj2KhTvlFEYiIJLFATmL3W/tHplAJOsDMoRutnx3TCCSLQEZQnfasS+7JpCGbrNpR5zCSDYGZAjdY99e7J1AGrrB1l3YfgrT0Fm713/iGkhDpwys/NBFtIbmzaz53LcwDU0aW+3Rr/EamjG5zk/v3j+PvdmL5w+f5t/0dzD/ET3zQ6JRtMORVT0zgV4YRUsc/EAeDugHGb3a8Vl+RUAvlPSLjnfz4q6Afiamf7knmp/dGxAPwd85SAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAk/wCdmoVtOJV6ygAAAABJRU5ErkJggg=="/>
+<title>Prevención IAAS</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:#0A0E14;color:#EDF2FA;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;overscroll-behavior:none}
+:root{--bg:#0A0E14;--s1:#0F1621;--s2:#161E2C;--b1:#1E2D42;--b2:#253650;--t1:#EDF2FA;--t2:#8BA0BE;--t3:#4A607A;--safe-t:env(safe-area-inset-top,0px);--safe-b:env(safe-area-inset-bottom,0px)}
+#app{max-width:430px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column}
+/* PIN */
+.pin-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:32px 24px;text-align:center;background:var(--bg)}
+.pin-logo{font-size:64px;margin-bottom:20px}
+.pin-title{font-size:22px;font-weight:800;margin-bottom:8px}
+.pin-sub{font-size:14px;color:var(--t2);margin-bottom:32px}
+.pin-dots{display:flex;gap:14px;justify-content:center;margin-bottom:16px}
+.pin-dot{width:18px;height:18px;border-radius:50%;border:2px solid #253650;background:transparent;transition:all .15s}
+.pin-dot.filled{background:#4A90D9;border-color:#4A90D9}
+.pin-dot.error{background:#F85149;border-color:#F85149}
+.pin-err{font-size:13px;color:#F87171;margin-bottom:16px;min-height:20px}
+.pin-pad{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:100%;max-width:280px}
+.pin-btn{height:72px;border:1.5px solid #1E2D42;border-radius:16px;background:#0F1621;color:#EDF2FA;font-size:24px;font-weight:700;cursor:pointer;-webkit-appearance:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;transition:all .1s}
+.pin-btn:active{background:#1C2E45;transform:scale(.94)}
+.pin-sub-lbl{font-size:9px;color:#4A607A;letter-spacing:.08em;font-weight:400}
+/* APP */
+.hdr{background:var(--s1);border-bottom:1px solid var(--b1);padding:14px 16px;padding-top:calc(14px + var(--safe-t));display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:200}
+.hdr-logo{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.hdr-title{font-size:15px;font-weight:800}
+.hdr-sub{font-size:11px;color:var(--t2);margin-top:1px}
+.hdr-back{margin-left:auto;background:var(--s2);border:1px solid var(--b2);color:var(--t2);padding:8px 14px;border-radius:10px;font-size:13px;cursor:pointer}
+.bnav{background:var(--s1);border-top:1px solid var(--b1);display:flex;padding-bottom:var(--safe-b);position:sticky;bottom:0;z-index:200}
+.bnav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 4px;cursor:pointer;gap:3px;border:none;background:transparent;color:var(--t3)}
+.bnav-item.on{color:#4A90D9}
+.bnav-icon{font-size:20px}
+.bnav-lbl{font-size:10px;font-weight:700}
+.body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.page{padding:16px 14px 24px}
+.card{background:var(--s1);border:1px solid var(--b1);border-radius:16px;padding:16px;margin-bottom:12px}
+.card-l{border-left:3px solid}
+.stitle{font-size:10px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px}
+.fld{margin-bottom:12px}
+.fld label{display:block;font-size:11px;color:var(--t2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em}
+.fld input,.fld select{width:100%;background:var(--bg);border:1.5px solid var(--b2);border-radius:12px;color:var(--t1);padding:14px 16px;font-size:16px;font-family:inherit;outline:none;-webkit-appearance:none;appearance:none}
+.fld input:focus,.fld select:focus{border-color:#4A90D9}
+.fld select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%238BA0BE' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:42px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.crit{display:flex;align-items:flex-start;gap:12px;padding:14px 0;border-bottom:1px solid var(--b1)}
+.crit:last-child{border-bottom:none;padding-bottom:0}
+.cnum{font-size:12px;color:var(--t3);font-weight:700;min-width:20px;margin-top:2px;flex-shrink:0}
+.ctxt{font-size:14px;color:#C8D8EE;line-height:1.5;flex:1}
+.cbtns{display:flex;gap:8px;flex-shrink:0}
+.cbtn{width:44px;height:44px;border-radius:12px;border:none;cursor:pointer;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;transition:all .12s;-webkit-appearance:none}
+.csi{background:#0C1F1A;color:#3FB950}
+.csi.on{background:#163326;color:#4ADE80;box-shadow:0 0 0 2px #3FB950}
+.cno{background:#1F0C0C;color:#6B3030}
+.cno.on{background:#321A1A;color:#F87171;box-shadow:0 0 0 2px #F85149}
+.chip{display:inline-flex;align-items:center;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700}
+.btn{width:100%;padding:17px;border:none;border-radius:14px;color:#fff;font-size:16px;font-weight:700;cursor:pointer;-webkit-appearance:none;transition:transform .1s}
+.btn:active{transform:scale(.97)}
+.btn-ghost{width:100%;padding:15px;background:transparent;border:1.5px solid var(--b2);border-radius:14px;color:var(--t2);font-size:15px;cursor:pointer;margin-top:10px;-webkit-appearance:none}
+.btn2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.bxl{padding:17px 10px;border:none;border-radius:14px;color:#fff;font-size:15px;font-weight:700;cursor:pointer;-webkit-appearance:none;transition:transform .1s}
+.bxl:active{transform:scale(.97)}
+.bg{background:linear-gradient(135deg,#166534,#22C55E)}
+.br{background:linear-gradient(135deg,#991B1B,#EF4444)}
+.pac-row{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}
+.ppill{padding:9px 14px;border-radius:20px;font-size:13px;font-weight:700;cursor:pointer;border:2px solid;background:transparent;-webkit-appearance:none}
+.ppill:active{transform:scale(.95)}
+.padd{padding:9px 14px;border-radius:20px;font-size:13px;font-weight:700;cursor:pointer;border:2px dashed var(--b2);color:var(--t2);background:transparent;-webkit-appearance:none}
+.ced{background:var(--s1);border:1.5px solid var(--b1);border-left:4px solid;border-radius:16px;padding:18px;margin-bottom:12px;cursor:pointer;display:flex;align-items:center;gap:14px;transition:transform .1s}
+.ced:active{transform:scale(.98)}
+.ced-ico{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0}
+.ced-lbl{font-size:16px;font-weight:800}
+.ced-sub{font-size:12px;color:var(--t2);margin-top:4px;line-height:1.4}
+.ced-arr{margin-left:auto;color:var(--t3);font-size:22px;flex-shrink:0}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.sbox{background:var(--s1);border:1px solid var(--b1);border-radius:14px;padding:14px 8px;text-align:center}
+.snum{font-size:24px;font-weight:800}
+.slbl{font-size:10px;color:var(--t3);margin-top:3px;text-transform:uppercase}
+.hero{text-align:center;padding:32px 16px 20px}
+.hero-ico{font-size:60px;margin-bottom:16px}
+.hero-t{font-size:22px;font-weight:800;margin-bottom:10px}
+.hero-s{font-size:14px;color:var(--t2);line-height:1.7;max-width:300px;margin:0 auto}
+.hitem{background:var(--s2);border:1px solid var(--b1);border-radius:14px;padding:14px;margin-bottom:10px;display:flex;align-items:center;gap:12px}
+.hi-info{flex:1;min-width:0}
+.hi-t{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hi-s{font-size:12px;color:var(--t2);margin-top:3px}
+.pac-sum{display:flex;align-items:center;padding:10px 0;border-bottom:1px solid var(--b1)}
+.pac-sum:last-child{border-bottom:none}
+.err-box{background:#200A0A;border:1px solid #F85149;border-radius:12px;padding:12px 16px;font-size:13px;color:#F87171;margin-bottom:12px}
+.res-card{background:var(--s1);border:1px solid var(--b1);border-radius:16px;padding:20px;margin-bottom:12px;text-align:center}
+.big-pct{font-size:56px;font-weight:800}
+.nivel{display:inline-block;padding:6px 18px;border-radius:20px;font-size:13px;font-weight:700;margin-top:8px}
+@keyframes up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.up{animation:up .3s ease both}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
+<script>
+const PIN="0210";
+const CEDULAS={
+  ITS:{id:"ITS",label:"ITS",color:"#E05C5C",icon:"🩸",fullLabel:"Infección del Torrente Sanguíneo — CVC",tieneNombre:true,tieneNacimiento:true,tieneId:false,tieneGenero:false,tieneNo:false,criterios:["Registro diario de condiciones del catéter (punto de inserción sin retirar apósito)","Curación del catéter con técnica aséptica y cambio de apósito según normatividad","Técnica correcta al interrumpir conexión con uso de desinfectante (alcohol 70%)","Cambio de sistema de infusión según tipo de solución","Evaluación diaria de permanencia o retiro del CVC (nota de evolución)","Registro de días de instalación del catéter"]},
+  IVU:{id:"IVU",label:"IVU",color:"#F5A623",icon:"🚿",fullLabel:"Infección de Vías Urinarias — Catéter Urinario",tieneNombre:true,tieneNacimiento:true,tieneId:true,tieneGenero:true,tieneNo:false,criterios:["Catéter vesical con membrete de identificación","Catéter vesical fijo de acuerdo al sexo del paciente","Higiene de genitales diaria con agua y jabón mientras está instalado","Línea de drenaje libre de obstrucción","Bolsa colectora por debajo del nivel de la vejiga, sin tocar el suelo","Sistema sin desconexiones en todo momento","Evaluación diaria de permanencia o retiro del catéter urinario","Registro diario de características macroscópicas de la orina","Registro de días de instalación del catéter"]},
+  NAVM:{id:"NAVM",label:"NAVM",color:"#4A90D9",icon:"🫁",fullLabel:"Neumonía Asociada a Ventilación Mecánica",tieneNombre:true,tieneNacimiento:true,tieneId:true,tieneGenero:false,tieneNo:false,criterios:["Intubación con equipo desinfectado y adecuadamente resguardado","Posición de cama 30°-45° (adultos/niños) o 10°-15° (neonatos) según patología","Médico evalúa y registra diariamente la posible interrupción de sedación","Médico evalúa y registra diariamente la posibilidad de retiro de ventilación","Aspiración de secreciones endotraqueales con sistema cerrado","Higiene oral con SSN 0.9% (adultos) / agua bidestilada (neonatos) cada 6-8 hrs","Uso de humedad activa o pasiva según características del equipo"]},
+  ISQ:{id:"ISQ",label:"ISQ",color:"#00C9A7",icon:"🔪",fullLabel:"Infección de Sitio Quirúrgico",tieneNombre:true,tieneNacimiento:true,tieneId:true,tieneGenero:false,tieneNo:false,criterios:["Profilaxis antimicrobiana prequirúrgica en tiempo y forma (60 min previo a incisión)","Eliminación de vello con cortadora eléctrica o tijeras (NO rastrillos) 20-30 min antes","Glucosa en sangre pre, trans y 24 hrs posoperatorio (nota médica)","Temperatura corporal > 35.5°C (hipotermia en cx cardiacas como parte del procedimiento)","Herida sellada con apósito intacto primeras 48 hrs postquirúrgicas","Clasificación de herida quirúrgica en expediente (nota posoperatoria)"]},
+  Antisepticos:{id:"Antisepticos",label:"Antisépticos",color:"#A78BFA",icon:"🧴",fullLabel:"Vigilancia de Antisépticos",tieneNombre:false,tieneNacimiento:false,tieneId:false,tieneGenero:false,tieneNo:true,criterios:["Etiquetado del frasco: fecha de envasado, caducidad y apertura","Distribución en frascos según características del antiséptico","Dotación de antisépticos máximo cada 24 hrs","Antiséptico desechado después de 24 hrs de apertura del frasco"]}
+};
+const TURNOS=["Matutino","Vespertino","Nocturno","Jornada Acumulada"];
+const MAX_P=10;
+const tc=t=>t===null?"#4A5568":t>=85?"#3FB950":t>=60?"#F5A623":"#F85149";
+const tbg=t=>t===null?"#1A2030":t>=85?"#0F2420":t>=60?"#2A1F00":"#2A0A0A";
+const nivel=t=>t>=85?"✅ Aceptable":t>=60?"⚠️ En riesgo":"🔴 Crítico";
+const calcT=(p,n)=>{const v=Array.from({length:n},(_,i)=>p["c"+(i+1)]??null).filter(v=>v!==null);if(!v.length)return null;return Math.round(v.filter(v=>v===true).length/v.length*100);};
+const pvacio=ced=>{const p={fecha:new Date().toISOString().split("T")[0],turno:"",servicio:"",nombre:"",nacimiento:"",genero:"",id_pac:"",no:""};ced.criterios.forEach((_,i)=>{p["c"+(i+1)]=null;});return p;};
+
+// STATE
+let STATE={
+  vista:"pin", // pin|home|form|result
+  navTab:"cedulas",
+  cedId:null,
+  pacs:[],
+  pi:0,
+  entidad:"",
+  unidad:"",
+  hist:[]
+};
+
+try{STATE.hist=JSON.parse(localStorage.getItem("iaas_h")||"[]");}catch{}
+try{if(localStorage.getItem("iaas_pin")==="1")STATE.vista="home";}catch{}
+
+function saveHist(){try{localStorage.setItem("iaas_h",JSON.stringify(STATE.hist.slice(0,20)));}catch{}}
+
+function render(){
+  const app=document.getElementById("app");
+  if(STATE.vista==="pin"){app.innerHTML=renderPin();setupPin();return;}
+  if(STATE.vista==="home"){app.innerHTML=renderHome();setupHome();return;}
+  if(STATE.vista==="form"){app.innerHTML=renderForm();setupForm();return;}
+  if(STATE.vista==="result"){app.innerHTML=renderResult();setupResult();return;}
+}
+
+// PIN
+function renderPin(){
+  return`<div class="pin-screen">
+    <div class="pin-logo">🛡️</div>
+    <div class="pin-title">Prevención IAAS</div>
+    <div class="pin-sub">Ingresa el PIN de acceso</div>
+    <div class="pin-dots" id="dots">
+      <div class="pin-dot" id="d0"></div><div class="pin-dot" id="d1"></div>
+      <div class="pin-dot" id="d2"></div><div class="pin-dot" id="d3"></div>
+    </div>
+    <div class="pin-err" id="pin-err"></div>
+    <div class="pin-pad">
+      ${[["1",""],["2","ABC"],["3","DEF"],["4","GHI"],["5","JKL"],["6","MNO"],["7","PQRS"],["8","TUV"],["9","WXYZ"],["",""],["0",""],["⌫",""]].map(([d,s])=>
+        d===""?`<div></div>`:
+        `<button class="pin-btn" onclick="pinPress('${d}')">${d}<span class="pin-sub-lbl">${s}</span></button>`
+      ).join("")}
+    </div>
+  </div>`;
+}
+let pinDigits=[];
+function setupPin(){pinDigits=[];}
+function pinPress(d){
+  if(d==="⌫"){pinDigits=pinDigits.slice(0,-1);updateDots(false);return;}
+  if(pinDigits.length>=4)return;
+  pinDigits.push(d);updateDots(false);
+  if(pinDigits.length===4){
+    setTimeout(()=>{
+      if(pinDigits.join("")===PIN){
+        try{localStorage.setItem("iaas_pin","1");}catch{}
+        STATE.vista="home";render();
+      }else{
+        updateDots(true);
+        document.getElementById("pin-err").textContent="PIN incorrecto. Intenta de nuevo.";
+        setTimeout(()=>{pinDigits=[];updateDots(false);document.getElementById("pin-err").textContent="";} ,800);
+      }
+    },150);
+  }
+}
+function updateDots(err){
+  for(let i=0;i<4;i++){
+    const d=document.getElementById("d"+i);
+    if(d){d.className="pin-dot"+(pinDigits.length>i?" filled":"")+(err?" error":"");}
+  }
+}
+
+// HOME
+function renderHome(){
+  const ced=Object.values(CEDULAS);
+  const histHtml=STATE.hist.length===0?
+    `<div style="text-align:center;padding:60px 20px;color:var(--t3)"><div style="font-size:48px;margin-bottom:14px">📋</div><div style="font-size:15px;font-weight:600">Sin auditorías aún</div></div>`:
+    STATE.hist.map(h=>`<div class="hitem up">
+      <div style="font-size:24px">${h.icon}</div>
+      <div class="hi-info"><div class="hi-t">${h.fullLabel}</div><div class="hi-s">${h.unidad} · ${h.fecha} · ${h.n} pacs.</div></div>
+      <div class="chip" style="background:${tbg(h.tasa)};color:${tc(h.tasa)};margin-right:6px">${h.tasa}%</div>
+      <button style="background:#166534;border:none;border-radius:10px;color:#fff;padding:9px 11px;font-size:14px;cursor:pointer;font-weight:700;flex-shrink:0" onclick="doExcel('${h.id}')">📊</button>
+    </div>`).join("");
+
+  return`<div style="max-width:430px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;background:var(--bg)">
+    <div class="hdr">
+      <div class="hdr-logo" style="background:linear-gradient(135deg,#1E3A5F,#0D2137)">🛡️</div>
+      <div><div class="hdr-title">Prevención IAAS</div><div class="hdr-sub">Auditorías de Cumplimiento</div></div>
+    </div>
+    <div class="body" id="home-body">
+      <div class="page" id="tab-cedulas">
+        <div class="hero up">
+          <div class="hero-ico">🏥</div>
+          <div class="hero-t">Auditorías IAAS</div>
+          <div class="hero-s">Selecciona una cédula, registra hasta 10 pacientes y exporta el Excel oficial.</div>
+        </div>
+        ${ced.map((c,i)=>`<div class="ced up" style="animation-delay:${i*.05}s;border-left-color:${c.color}" onclick="iniciar('${c.id}')">
+          <div class="ced-ico" style="background:${c.color}18">${c.icon}</div>
+          <div style="flex:1;min-width:0"><div class="ced-lbl" style="color:${c.color}">${c.label}</div><div class="ced-sub">${c.fullLabel}</div><div class="ced-sub" style="margin-top:4px;color:var(--t3)">${c.criterios.length} criterios · hasta ${MAX_P} pacientes</div></div>
+          <div class="ced-arr">›</div>
+        </div>`).join("")}
+      </div>
+      <div class="page" id="tab-hist" style="display:none">${histHtml}</div>
+    </div>
+    <div class="bnav">
+      <button class="bnav-item on" id="btn-ced" onclick="switchTab('cedulas')"><span class="bnav-icon">📋</span><span class="bnav-lbl">Cédulas</span></button>
+      <button class="bnav-item" id="btn-hist" onclick="switchTab('historial')"><span class="bnav-icon">🕐</span><span class="bnav-lbl">Historial (${STATE.hist.length})</span></button>
+    </div>
+  </div>`;
+}
+function setupHome(){}
+function switchTab(t){
+  document.getElementById("tab-cedulas").style.display=t==="cedulas"?"block":"none";
+  document.getElementById("tab-hist").style.display=t==="historial"?"block":"none";
+  document.getElementById("btn-ced").className="bnav-item"+(t==="cedulas"?" on":"");
+  document.getElementById("btn-hist").className="bnav-item"+(t==="historial"?" on":"");
+}
+function iniciar(id){
+  STATE.cedId=id;STATE.pacs=[pvacio(CEDULAS[id])];STATE.pi=0;
+  STATE.vista="form";render();
+}
+function doExcel(hid){
+  const h=STATE.hist.find(x=>x.id===hid);
+  if(h)exportExcel(CEDULAS[h.cedId],h.pacs,h.entidad,h.unidad);
+}
+
+// FORM
+function getCed(){return CEDULAS[STATE.cedId];}
+function getPac(){return STATE.pacs[STATE.pi]||{};}
+function tasaP(p){const c=getCed();return c?calcT(p,c.criterios.length):null;}
+function tasaAll(){const ts=STATE.pacs.map(p=>tasaP(p)).filter(t=>t!==null);return ts.length?Math.round(ts.reduce((a,b)=>a+b)/ts.length):null;}
+function hasDatos(p){const c=getCed();return c&&c.criterios.some((_,i)=>p["c"+(i+1)]!==null);}
+
+function renderForm(){
+  const ced=getCed();const pac=getPac();
+  const t=tasaP(pac);const tg=tasaAll();
+  const nc=ced.criterios.length;
+
+  const pacPills=STATE.pacs.map((p,i)=>{
+    const t2=tasaP(p);const done=hasDatos(p);const isAct=i===STATE.pi;
+    return`<button class="ppill${done?" ":""}${isAct?" ":"empty"}" 
+      style="border-color:${isAct?ced.color:done?tc(t2):"var(--b2)"};color:${isAct?"#fff":done?tc(t2):"var(--t2)"};background:${isAct?ced.color:"transparent"}"
+      onclick="setPi(${i})">P${i+1}${done&&t2!==null?" "+t2+"%":""}</button>`;
+  }).join("");
+
+  const critHtml=ced.criterios.map((c,i)=>{
+    const v=pac["c"+(i+1)];
+    return`<div class="crit">
+      <div class="cnum">${i+1}</div>
+      <div class="ctxt">${c}</div>
+      <div class="cbtns">
+        <button class="cbtn csi${v===true?" on":""}" onclick="mark(${i},true)">✓</button>
+        <button class="cbtn cno${v===false?" on":""}" onclick="mark(${i},false)">✗</button>
+      </div>
+    </div>`;
+  }).join("");
+
+  return`<div style="max-width:430px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;background:var(--bg)">
+    <div class="hdr" style="border-bottom-color:${ced.color}44">
+      <div class="hdr-logo" style="background:${ced.color}20;font-size:22px">${ced.icon}</div>
+      <div><div class="hdr-title" style="color:${ced.color}">${ced.label}</div><div class="hdr-sub">${ced.fullLabel}</div></div>
+      <button class="hdr-back" onclick="volver()">← Salir</button>
+    </div>
+    <div class="body"><div class="page">
+      <div class="card up">
+        <div class="stitle">Establecimiento</div>
+        <div class="fld"><label>Entidad Federativa</label><input id="f-entidad" placeholder="Ej: Morelos" value="${STATE.entidad}" oninput="STATE.entidad=this.value"/></div>
+        <div class="fld"><label>Unidad Médica</label><input id="f-unidad" placeholder="Nombre de la unidad" value="${STATE.unidad}" oninput="STATE.unidad=this.value"/></div>
+      </div>
+      <div class="card up" style="animation-delay:.05s">
+        <div style="display:flex;align-items:center;margin-bottom:14px">
+          <div class="stitle" style="margin:0">Pacientes</div>
+          <div class="chip" style="margin-left:auto;background:${tbg(tg)};color:${tc(tg)}">${tg!==null?tg+"% general":"Sin datos"}</div>
+        </div>
+        <div class="pac-row">
+          ${pacPills}
+          ${STATE.pacs.length<MAX_P?`<button class="padd" onclick="addPac()">＋ Paciente</button>`:""}
+        </div>
+        <div style="font-size:12px;color:var(--t3)">${STATE.pacs.filter(hasDatos).length} de ${MAX_P} pacientes con datos</div>
+      </div>
+      <div class="card card-l up" style="animation-delay:.1s;border-left-color:${ced.color}">
+        <div style="display:flex;align-items:center;margin-bottom:14px">
+          <div class="stitle" style="margin:0;color:${ced.color}">Paciente ${STATE.pi+1}</div>
+          ${STATE.pacs.length>1?`<button style="margin-left:auto;background:#321A1A;border:none;border-radius:8px;color:#F87171;padding:7px 12px;font-size:12px;cursor:pointer;font-weight:700" onclick="delPac(${STATE.pi})">🗑 Quitar</button>`:""}
+        </div>
+        <div class="g2">
+          <div class="fld"><label>Fecha</label><input type="date" value="${pac.fecha||""}" oninput="upd('fecha',this.value)"/></div>
+          <div class="fld"><label>Turno</label><select oninput="upd('turno',this.value)">
+            <option value="">Turno</option>
+            ${TURNOS.map(t=>`<option value="${t}"${pac.turno===t?" selected":""}>${t}</option>`).join("")}
+          </select></div>
+        </div>
+        ${ced.tieneNo?`<div class="fld"><label>No.</label><input type="number" placeholder="Consecutivo" value="${pac.no||""}" oninput="upd('no',this.value)"/></div>`:""}
+        <div class="fld"><label>Servicio / Unidad</label><input placeholder="Ej: UCI, Cirugía..." value="${pac.servicio||""}" oninput="upd('servicio',this.value)"/></div>
+        ${ced.tieneGenero?`<div class="fld"><label>Género</label><select oninput="upd('genero',this.value)"><option value="">Seleccionar</option><option value="1"${pac.genero==="1"?" selected":""}>1 — Mujer</option><option value="2"${pac.genero==="2"?" selected":""}>2 — Hombre</option></select></div>`:""}
+        ${ced.tieneNombre?`<div class="fld"><label>Nombre Completo</label><input placeholder="Apellidos, Nombre(s)" value="${pac.nombre||""}" oninput="upd('nombre',this.value)"/></div>`:""}
+        <div class="g2">
+          ${ced.tieneNacimiento?`<div class="fld"><label>Nacimiento</label><input type="date" value="${pac.nacimiento||""}" oninput="upd('nacimiento',this.value)"/></div>`:""}
+          ${ced.tieneId?`<div class="fld"><label>NSS / RFC / Exp.</label><input placeholder="ID" value="${pac.id_pac||""}" oninput="upd('id_pac',this.value)"/></div>`:""}
+        </div>
+      </div>
+      <div class="card up" style="animation-delay:.15s">
+        <div style="display:flex;align-items:center;margin-bottom:16px">
+          <div class="stitle" style="margin:0">Criterios · P${STATE.pi+1}</div>
+          <div class="chip" style="margin-left:auto;background:${tbg(t)};color:${tc(t)}">${t!==null?t+"%":"Sin obs."}</div>
+        </div>
+        ${critHtml}
+      </div>
+      <button class="btn up" style="background:linear-gradient(135deg,${ced.color},${ced.color}AA);animation-delay:.2s" onclick="finalizar()">Ver Resultados →</button>
+      <button class="btn-ghost" onclick="volver()">Cancelar</button>
+    </div></div>
+  </div>`;
+}
+
+function setupForm(){}
+function setPi(i){STATE.pi=i;render();}
+function addPac(){if(STATE.pacs.length>=MAX_P)return;STATE.pacs.push(pvacio(getCed()));STATE.pi=STATE.pacs.length-1;render();}
+function delPac(i){if(STATE.pacs.length===1)return;STATE.pacs.splice(i,1);STATE.pi=Math.min(i,STATE.pacs.length-1);render();}
+function upd(k,v){STATE.pacs[STATE.pi][k]=v;}
+function mark(i,v){const k="c"+(i+1);STATE.pacs[STATE.pi][k]=STATE.pacs[STATE.pi][k]===v?null:v;render();}
+function volver(){STATE.cedId=null;STATE.pacs=[];STATE.vista="home";render();}
+function finalizar(){
+  const con=STATE.pacs.filter(hasDatos);
+  if(!con.length)return;
+  const ced=getCed();const tg=tasaAll();
+  STATE.hist.unshift({id:String(Date.now()),cedId:STATE.cedId,icon:ced.icon,color:ced.color,fullLabel:ced.fullLabel,
+    unidad:STATE.unidad||"—",entidad:STATE.entidad||"—",fecha:new Date().toLocaleDateString("es-MX"),
+    tasa:tg,n:con.length,pacs:JSON.parse(JSON.stringify(STATE.pacs))});
+  STATE.hist=STATE.hist.slice(0,20);saveHist();
+  STATE.vista="result";render();
+}
+
+// RESULT
+function renderResult(){
+  const ced=getCed();const tg=tasaAll();const nc=ced.criterios.length;
+  const con=STATE.pacs.filter(hasDatos);
+  const pacRows=STATE.pacs.map((p,i)=>{
+    const t2=tasaP(p);if(t2===null)return"";
+    const cum=ced.criterios.filter((_,j)=>p["c"+(j+1)]===true).length;
+    const tot=ced.criterios.filter((_,j)=>p["c"+(j+1)]!==null).length;
+    return`<div class="pac-sum">
+      <div style="font-size:13px;font-weight:700;color:${ced.color};min-width:50px">P${i+1}</div>
+      <div style="flex:1;min-width:0"><div style="font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${p.nombre||p.servicio||"—"}</div>
+      <div style="font-size:11px;color:var(--t3);margin-top:2px">${cum}/${tot} criterios cumplidos</div></div>
+      <div class="chip" style="background:${tbg(t2)};color:${tc(t2)}">${t2}%</div>
+    </div>`;
+  }).join("");
+  return`<div style="max-width:430px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;background:var(--bg)">
+    <div class="hdr">
+      <div class="hdr-logo" style="background:${ced.color}20;font-size:22px">${ced.icon}</div>
+      <div><div class="hdr-title">Resultados</div><div class="hdr-sub">${STATE.unidad||"—"} · ${con.length} pacientes</div></div>
+      <button class="hdr-back" onclick="volver()">← Inicio</button>
+    </div>
+    <div class="body"><div class="page">
+      <div class="res-card up" style="border-top:4px solid ${tc(tg)}">
+        <div class="big-pct" style="color:${tc(tg)}">${tg!==null?tg+"%":"—"}</div>
+        <div class="nivel" style="background:${tbg(tg)};color:${tc(tg)}">${tg!==null?nivel(tg):"Sin datos"}</div>
+        <div style="font-size:12px;color:var(--t2);margin-top:10px">${ced.fullLabel}</div>
+      </div>
+      <div class="card up" style="animation-delay:.06s">
+        <div class="stitle">Por paciente</div>
+        ${pacRows}
+      </div>
+      <div class="btn2 up" style="animation-delay:.1s">
+        <button class="bxl bg" onclick="doExcelResult()">📊 Excel</button>
+        <button class="bxl br" onclick="doPDF()">📄 PDF</button>
+      </div>
+      <button class="btn-ghost" onclick="STATE.vista='form';render()">← Editar datos</button>
+      <button class="btn-ghost" style="margin-top:8px" onclick="volver()">Nueva Auditoría</button>
+    </div></div>
+  </div>`;
+}
+function setupResult(){}
+function doExcelResult(){exportExcel(getCed(),STATE.pacs,STATE.entidad,STATE.unidad);}
+function doPDF(){exportPDF(getCed(),STATE.pacs,STATE.entidad,STATE.unidad);}
+
+// EXCEL
+function exportExcel(ced,pacs,entidad,unidad){
+  const nc=ced.criterios.length;const aoa=[];
+  aoa.push(["CÉDULA DE SUPERVISIÓN IAAS — PREVENCIÓN Y CONTROL DE INFECCIONES ASOCIADAS A LA ATENCIÓN A LA SALUD"]);
+  aoa.push([ced.fullLabel]);
+  aoa.push(["Entidad: "+(entidad||"")+"     Unidad: "+(unidad||"")+"     Fecha: "+new Date().toLocaleDateString("es-MX")]);
+  aoa.push([""]);
+  const hdrs=[];
+  if(ced.tieneNo)hdrs.push("No.");
+  hdrs.push("FECHA","TURNO","SERVICIO");
+  if(ced.tieneGenero)hdrs.push("GÉNERO");
+  if(ced.tieneNombre)hdrs.push("NOMBRE COMPLETO");
+  if(ced.tieneNacimiento)hdrs.push("FECHA NACIMIENTO");
+  if(ced.tieneId)hdrs.push("ID PACIENTE");
+  ced.criterios.forEach((c,i)=>hdrs.push((i+1)+". "+c.toUpperCase()));
+  hdrs.push("% CUMPLIMIENTO");
+  aoa.push(hdrs);
+  for(let i=0;i<MAX_P;i++){
+    const p=pacs[i]||{};const row=[];
+    if(ced.tieneNo)row.push(p.no||(i+1));
+    row.push(p.fecha||"",p.turno||"",p.servicio||"");
+    if(ced.tieneGenero)row.push(p.genero||"");
+    if(ced.tieneNombre)row.push(p.nombre||"");
+    if(ced.tieneNacimiento)row.push(p.nacimiento||"");
+    if(ced.tieneId)row.push(p.id_pac||"");
+    for(let j=1;j<=nc;j++){const v=p["c"+j];row.push(v===true?"SI":v===false?"NO":"");}
+    const t=calcT(p,nc);row.push(t!==null?t+"%":"");
+    aoa.push(row);
+  }
+  const tasas=pacs.map(p=>calcT(p,nc)).filter(t=>t!==null);
+  const tot=Array(hdrs.length).fill("");tot[0]="% CUMPLIMIENTO GENERAL";
+  if(tasas.length)tot[hdrs.length-1]=Math.round(tasas.reduce((a,b)=>a+b)/tasas.length)+"%";
+  aoa.push(tot);
+  const ws=XLSX.utils.aoa_to_sheet(aoa);
+  const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,ced.label);
+  XLSX.writeFile(wb,"Cedula_"+ced.id+"_"+new Date().toISOString().split("T")[0]+".xlsx");
+}
+
+// PDF
+function exportPDF(ced,pacs,entidad,unidad){
+  const nc=ced.criterios.length;
+  const tasas=pacs.map(p=>calcT(p,nc)).filter(t=>t!==null);
+  const tg=tasas.length?Math.round(tasas.reduce((a,b)=>a+b)/tasas.length):null;
+  const col=tg>=85?"#27AE60":tg>=60?"#E67E22":"#E74C3C";
+  const filas=pacs.map((p,i)=>{
+    const t=calcT(p,nc);if(t===null)return"";
+    const c2=t>=85?"#27AE60":t>=60?"#E67E22":"#E74C3C";
+    const crits=Array.from({length:nc},(_,j)=>{const v=p["c"+(j+1)];return`<td style="text-align:center;font-weight:700;color:${v===true?"#27AE60":v===false?"#E74C3C":"#bbb"};font-size:10px;padding:5px 3px;background:${v===true?"#EAF7ED":v===false?"#FDECEA":""}">${v===true?"SI":v===false?"NO":""}</td>`;}).join("");
+    return`<tr><td style="padding:6px 8px;font-size:11px;font-weight:600;background:${i%2?"#f9f9f9":"#fff"}">P${i+1}${p.nombre?"<br><span style='font-weight:400;color:#666'>"+p.nombre+"</span>":""}</td><td style="padding:5px 4px;font-size:10px;color:#555;background:${i%2?"#f9f9f9":"#fff"}">${p.fecha||""}</td><td style="padding:5px 4px;font-size:10px;color:#555;background:${i%2?"#f9f9f9":"#fff"}">${p.turno||""}</td><td style="padding:5px 4px;font-size:10px;color:#555;background:${i%2?"#f9f9f9":"#fff"}">${p.servicio||""}</td>${crits}<td style="text-align:center;font-weight:800;color:${c2};font-size:12px;background:${i%2?"#f9f9f9":"#fff"}">${t}%</td></tr>`;
+  }).join("");
+  const html=`<!DOCTYPE html><html><head><meta charset="UTF-8"/><title>Cédula ${ced.label}</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:Arial,sans-serif;padding:24px;font-size:12px}.h1{background:#1F3864;color:#fff;padding:9px 14px;font-size:11px;font-weight:700;text-align:center}.h2{background:#2E75B6;color:#fff;padding:7px 14px;font-size:10px;text-align:center;margin-bottom:14px}table{width:100%;border-collapse:collapse}th{background:#1F3864;color:#fff;padding:7px 5px;text-align:center;font-size:9px;border:1px solid #163060}td{border:1px solid #ddd}.tot td{background:#2E75B6!important;color:#fff!important;font-weight:700;padding:8px;text-align:right}.foot{font-size:9px;color:#aaa;text-align:center;padding-top:10px;border-top:1px solid #eee;margin-top:14px}</style></head><body>
+  <div class="h1">CÉDULA DE SUPERVISIÓN — PREVENCIÓN Y CONTROL DE INFECCIONES IAAS</div>
+  <div class="h2">${ced.fullLabel}</div>
+  <p style="font-size:11px;margin-bottom:12px;color:#444">Entidad: <b>${entidad||"—"}</b> &nbsp;|&nbsp; Unidad: <b>${unidad||"—"}</b> &nbsp;|&nbsp; Fecha: <b>${new Date().toLocaleDateString("es-MX")}</b> &nbsp;|&nbsp; Cumplimiento: <b style="color:${col}">${tg!==null?tg+"%":"—"}</b></p>
+  <table><thead><tr><th style="text-align:left">Paciente</th><th>Fecha</th><th>Turno</th><th>Servicio</th>${ced.criterios.map((_,i)=>`<th>${i+1}</th>`).join("")}<th>%</th></tr></thead>
+  <tbody>${filas}<tr class="tot"><td colspan="4">% CUMPLIMIENTO GENERAL</td>${ced.criterios.map(()=>"<td style='background:#2E75B6!important;border-color:#1A4A8A'></td>").join("")}<td>${tg!==null?tg+"%":"—"}</td></tr></tbody></table>
+  <div style="font-size:9px;color:#666;margin-top:12px;line-height:1.6"><b>Criterios:</b><br>${ced.criterios.map((c,i)=>i+1+". "+c).join("<br>")}</div>
+  <div class="foot">Prevención de Infecciones IAAS · ${new Date().toLocaleDateString("es-MX",{day:"2-digit",month:"long",year:"numeric"})}</div></body></html>`;
+  const w=window.open("","_blank");w.document.write(html);w.document.close();w.focus();setTimeout(()=>w.print(),600);
+}
+
+render();
+</script>
+</body>
+</html>
