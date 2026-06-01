@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="IAAS"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="theme-color" content="#0A0E14"/>
+<link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjogIlByZXZlbmNpXHUwMGYzbiBJQUFTIiwgInNob3J0X25hbWUiOiAiSUFBUyIsICJkZXNjcmlwdGlvbiI6ICJBdWRpdG9yXHUwMGVkYXMgZGUgQ3VtcGxpbWllbnRvIElBQVMiLCAic3RhcnRfdXJsIjogIi4iLCAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwgImJhY2tncm91bmRfY29sb3IiOiAiIzBBMEUxNCIsICJ0aGVtZV9jb2xvciI6ICIjMEEwRTE0IiwgIm9yaWVudGF0aW9uIjogInBvcnRyYWl0LXByaW1hcnkiLCAiaWNvbnMiOiBbeyJzcmMiOiAiZGF0YTppbWFnZS9wbmc7YmFzZTY0LGlWQk9SdzBLR2dvQUFBQU5TVWhFVWdBQUFNQUFBQURBQ0FJQUFBRGR2dnRRQUFBRFNVbEVRVlI0bk8zY3dha2NSeFJBVVgzaGxSWmEvVEMwY1JZQ3hlR29GSWRBV1hpak1CU0VGNEtQTURhSWY2dGUxYUJ6QXBocHF1Njg3aG1tKytuZCsrYzM4RnB2VHg4QWowMUFKQUlpRVJDSmdFZ0VSQ0lnRWdHUkNJaEVRQ1FDSWhFUWlZQklCRVFpSUJJQmtRaUlSRUFrQWlJUkVJbUFTQVJFSWlDU1AwNGZ3UDk2L3ZEcDlDSGM1ZnUzTDZjUDRUODhYWFZqb1doKzBUMHhYUkdRYmw3dGVFbUhBNUxPRWdjek9oYVFkSlk3a3RHWmIySHEyZUhJcWs1UElPa01tQnhGb3hOSVBUTW0xM2t1SVBWTUdsdnRvWURVTTI5bXpTY0NVczhwQXl1L1BTRDFuTFY3L2ZjR3BKNGJiTjJGalFHcDV4Nzc5c0xmT1VoMkJXVDgzR2JUam13SlNEMTMyckV2VG1FazZ3TXlmbTYyZkhkTUlKTEZBUmsvOTF1N1J5WVFpWUJJVmdiay9QVW9GdTdVdmZlRkRmajc2K2RWTC9Ybng3OVd2ZFJqY1FvakVSREpzb0JjQUQyV1ZmdGxBcEVJaUVSQUpBSWlFUkNKZ0VnRVJDSWdFZ0dSQ0loRVFDUUNJaEVRaVlCSUJFUWlJQklCa1FpSVJFQWtBaUlSRUltQVNBUkVJaUFTQVpFSWlFUkFKQUlpRVJDSmdFZ0VSQ0lna3V1ZWtiand1WVdUSmcvN3F1Y3hta0FrQWlJUkVJbUFTQVJFSWlBU0FaRUlpRVJBSkFJaUVSQ0pnRWdFUkNJZ0VnR1JDSWhFUUNRQ0loRVFpWUJJQkVRaUlCSUJrUWlJNUxvYkN5ZnZtbHQ0TitCVk4vdE5Nb0ZJQkVRaUlCSUJrUWlJUkVBa0FpSVJFSW1BU0FSRUlpQVNBWkVJaUVSQUpBSWlFUkNKZ0VnRVJDSWdFZ0dSQ0loRVFDUUNJaEVRaVlCSUJFUWlJQklCa1FpSVJFQWtBaUlSRU1teWdMNS8rN0xxcFJpd2FyOU1JQklCa1Z6M2pNUkp2KzJERFJkYU9ZRmNCajJLaFR2bEZFWWlJSkxGQVRtTDNXL3RIcGxBSk9zRE1vUnV0bngzVENDU0xRRVpRbmZhc1MrN0pwQ0dick5wUjV6Q1NEWUdaQWpkWTk5ZTdKMUFHcnJCMWwzWWZnclQwRm03MTMvaUdraERwd3lzL05CRnRJYm16YXo1M0xjd0RVMGFXKzNSci9FYW1qRzV6ay92M2orUHZkbUw1dytmNXQvMGR6RC9FVDN6UTZKUnRNT1JWVDB6Z1Y0WVJVc2MvRUFlRHVnSEdiM2E4VmwrUlVBdmxQU0xqbmZ6NHE2QWZpYW1mN2tubXAvZEd4QVB3ZDg1U0FSRUlpQVNBWkVJaUVSQUpBSWlFUkNKZ0VnRVJDSWdFZ0dSQ0loRVFDUUNJaEVRaVlCSUJFUWlJQklCa1FpSVJFQWsvd0NkbW9WdE9KVjZ5Z0FBQUFCSlJVNUVya0pnZ2c9PSIsICJzaXplcyI6ICIxOTJ4MTkyIiwgInR5cGUiOiAiaW1hZ2UvcG5nIn0sIHsic3JjIjogImRhdGE6aW1hZ2UvcG5nO2Jhc2U2NCxpVkJPUncwS0dnb0FBQUFOU1VoRVVnQUFBZ0FBQUFJQUNBSUFBQUI3R2tPdEFBQUtTVWxFUVZSNG5PM2N5NDBiUnhSQVVjcVlsUlphVFJqZUtBc0Jqa05SS1E0RHlrSWJoZUVndkpBeGxrWWMvc251ZnZlY0NBcW9xbmRSVFlEdjNuOTQzZ0hRODhmU0N3QmdHUUlBRUNVQUFGRUNBQkFsQUFCUkFnQVFKUUFBVVFJQUVDVUFBRkVDQUJBbEFBQlJBZ0FRSlFBQVVRSUFFQ1VBQUZFQ0FCQWxBQUJSQWdBUUpRQUFVUUlBRUNVQUFGRUNBQkFsQUFCUkFnQVFKUUFBVVFJQUVDVUFBRkVDQUJBbEFBQlJBZ0FRSlFBQVVRSUFFQ1VBQUZFQ0FCQWxBQUJSQWdBUUpRQUFVUUlBRUNVQUFGRUNBQkFsQUFCUkFnQVFKUUFBVVFJQUVDVUFBRkVDQUJBbEFBQlJBZ0FRSlFBQVVRSUFFQ1VBQUZFQ0FCQWxBQUJSQWdBUUpRQUFVUUlBRUNVQUFGRUNBQkFsQUFCUkFnQVFKUUFBVVFJQUVDVUFBRkZQU3krQTQ1Ny8vR3ZwSmNBbC92bis5OUpMNEpCMzd6ODhMNzBHZm1IY001Z2tySW9BTE0vRUowc1BsaVVBeXpEMDRSVXhlRHdCZUNoekg0NVNnb2NSZ0VjdzkrRUNTbkJ2QW5CZlJqOWNTUWJ1UndEdXhlaUhHNUtCZXhDQUd6UDM0YTZVNElZRTRHYU1mbmdZR2JnSmZ3VnhHNlkvUEpJYmR4TmVBTmR5RUdGQm5nTFhFSURMR2Yyd0VqSndHWitBTG1UNnczcTRqNWZ4QWppYm93YXI1U2x3RmkrQTg1aitzR1p1NkZtOEFFN2xZTUdHZUFxY3dndmdKS1kvYklzN2V3b0JPTTVKZ2kxeWM0L3lDZWdRQndnRzhEbm9MVjRBYnpMOVlRWjMrUzBDc0o4VEE1TzQwWHNKd0I3T0NzempYdjlPQUY1elNtQXF0L3NWQWZpRjh3R3p1ZU0vRTREL09SbFE0S2EvRUlEL09CUFE0YjcvSUFDN25kTUFQVzc5VGdCMnpnRlV1ZnYxQURnQlVCYWZBT2tBeFBjZTJMWG5RRGNBNVYwSGZwYWRCdDBBQU1SRkE1QU5QckJYY3lZVUE5RGNhZUN3NEdUSUJTQzR4OENKYXZNaEZ3QUFmbWdGb0paMzRGeXBLUkVLUUdwZmdZdDFaa1VvQUFEOHJCS0FUdEtCNjBVbVJpSUFrYjBFYnFnd054SUJBT0IzOHdOUXlEaHdEK09ueC93QUFMRFg4QUNNRHpod1Y3Tm55T1FBek40NTRERUdUNUxKQVFEZ2dMRUJHQnh0NE1HbXpwT3hBUURnTUFFQWlKb1pnS252TldBcEk2Zkt6QUFBY05UQUFJd01OYkM0ZWJObFlBQUFPTVcwQU14TE5MQWV3eWJNdEFBQWNDSUJBSWdhRllCaHJ6TmdoU2JObVZFQkFPQjBBZ0FRTlNjQWs5NWx3SnFObVRaekFnREFXUVFBSU9wcDZRWEFJZCsrZmxsNkNkZjYrT256MGt1QS9ZYThBTVo4a2dNMlljYk1HUklBQU00bEFBQlJBZ0FRSlFBQVVSTUNNT1BYR0dCYkJreWVDUUVBNEFJQ0FCQWxBQUJSQWdBUUpRQUFVWnNQd0lBZjRvR04ydnI4Mlh3QUFMaU1BQUJFQ1FCQWxBQUFSQWtBUUpRQUFFUUpBRUNVQUFCRUNRQkFsQUFBUkFrQVFKUUFBRVFKQUVDVUFBQkVDUUJBbEFBQVJBa0FRSlFBQUVRSkFFQ1VBQUJFQ1FCQWxBQUFSQWtBUUpRQUFFUUpBRUNVQUFCRUNRQkFsQUFBUkFrQVFKUUFBRVFKQUVDVUFBQkVDUUJBbEFBQVJBa0FRSlFBQUVRSkFFQ1VBQUJFQ1FCQWxBQUFSQWtBUUpRQUFFUUpBRUNVQUFCRUNRQkFsQUFBUkFrQVFKUUFBRVFKQUVDVUFBQkVDUUJBbEFBQVJBa0FRSlFBQUVRSkFFQ1VBQUJFQ1FCQWxBQUFSQWtBUUpRQUFFUUpBRUNVQUFCRUNRQkFsQUFBUkFrQVFKUUFBRVFKQUVDVUFBQkVDUUJBbEFBQVJBa0FRSlFBQUVRSkFFQ1VBQUJFQ1FCQWxBQUFSQWtBUUpRQUFFUUpBRUNVQUFCRUNRQkFsQUFBUkFrQVFOVFQwZ3VvKy9iMXk5Skw0TDVzOFdFZlAzMWVlZ2xkWGdBQVVRSUFFQ1VBQUZFQ0FCQWxBQUJSQWdBUUpRQUFVUUlBRUNVQUFGRUNBQkFsQUFCUkFnQVFKUUFBVVFJQUVDVUFBRkVDQUJBbEFBQlJBZ0FRSlFBQVVRSUFFQ1VBQUZFQ0FCQWxBQUJSQWdBUUpRQUFVUUlBRUNVQUFGRUNBQkFsQUFCUkFnQVFKUUFBVVFJQUVDVUFBRkVDQUJBbEFBQlJBZ0FRSlFBQVVRSUFFQ1VBQUZFQ0FCQWxBQUJSQWdBUUpRQUFVUUlBRUNVQUFGRUNBQkFsQUFCUkFnQVFKUUFBVVFJQUVDVUFBRkVDQUJBbEFBQlJBZ0FRSlFBQVVRSUFFQ1VBQUZFQ0FCQWxBQUJSQWdBUUpRQUFVUUlBRUNVQUFGRUNBQkQxdFBRQzZqNSsrcnowRWxidDI5Y3ZTeS9oV3JhWTFmSUNBSWdTQUlBb0FRQ0lFZ0NBS0FFQWlCSUFnQ2dCQUlnU0FJQW9BUUNJRWdDQUtBRUFpQklBZ0NnQkFJZ1NBSUFvQVFDSUVnQ0FLQUVBaUJJQWdDZ0JBSWdTQUlBb0FRQ0lFZ0NBS0FFQWlCSUFnQ2dCQUlnU0FJQW9BUUNJRWdDQUtBRUFpQklBZ0NnQkFJZ1NBSUFvQVFDSUVnQ0FLQUVBaUJJQWdDZ0JBSWdTQUlBb0FRQ0lFZ0NBS0FFQWlCSUFnQ2dCQUlnU0FJQW9BUUNJRWdDQUtBRUFpQklBZ0NnQkFJZ1NBSUFvQVFDSUVnQ0FLQUVBaUJJQWdDZ0JBSWdTQUlBb0FRQ0lFZ0NBS0FFQWlCSUFnQ2dCQUlnU0FJQW9BUUNJRWdDQUtBRUFpQklBZ0NnQkFJZ1NBSUFvQVFDSUVnQ0FLQUVBaUJJQWdDZ0JBSWdTQUlBb0FRQ0lFZ0NBS0FFQWlCSUFnQ2dCQUlnU0FJQW9BUUNJRWdDQUtBRUFpTnA4QVA3NS92ZlNTd0NpdGo1L05oOEFBQzRqQUFCUkFnQVFKUUFBVVFJQUVEVWhBRnYvSVI3WW9nR1RaMElBQUxpQUFBQkVDUUJBbEFBQVJBMEp3SUJmWTRBTm1URnpucFplQUJ6eThkUG5wWmNBWXcxNUFRQndMZ0VBaUpvVGdCbWY1SUQxR3pOdDVnUUFnTE1JQUVEVXFBQ01lWmNCcXpWcHpvd0tBQUNuRXdDQXFHa0JtUFE2QTlabTJJU1pGZ0FBVGpRd0FNTVNEYXpFdk5reU1BQUFuR0ptQU9hRkdsald5S2t5TXdBQUhDVUFBRkZqQXpEeXZRWXNZdW84R1JzQUFBNmJISUNwMFFZZWFmQWttUnlBM2VpZEF4NWc5Z3daSGdBQTNqSS9BTE1ERHR6UCtPa3hQd0FBN0pVSXdQaU1BemRYbUJ1SkFPd2Fld25jU21SaVZBSUF3Q3VoQUVTU0RseXBNeXRDQWRpVjloVzRUR3BLdEFJQXdJdGNBRko1Qjg1U213KzVBT3g2ZXd5Y0lqZ1ppZ0hZSlhjYU9LQTVFNklCQUtBYmdHYndnZDlscDBFM0FMdndyZ012eW5NZ0hZQmRlKytCK0FTb0IyQ1hQd0dRNWU0THdHN25IRUNQVzc4VGdCZE9BM1M0N3o4SXdQK2NDU2h3MDE4SXdDK2NESmpOSGYrWkFMem1mTUJVYnZjckFyQ0hVd0x6dU5lL0U0RDluQldZeEkzZVN3RGU1TVRBRE83eVc5NjkvL0M4OUJyVzd2blB2NVplQW5BSm8vOHdMNERqbkNIWUlqZjNLQUU0aVpNRTIrTE9uc0lub1BQNEhBUXJaL1Nmemd2Z1BNNFdySmtiZWhZdmdBdDVDc0NxR1AwWDhBSzRrTk1HNitFK1hzWUw0RnFlQXJBZ28vOGFBbkFiTWdBUFp2UmZ6eWVnMjNBVzRaSGN1SnZ3QXJneFR3RzRLNlAvaGdUZ1hwUUFic2pjdndjQnVDOFpnQ3NaL2ZjakFJOGdBM0FCby8vZUJPQ2hsQUNPTXZjZlJnQ1dvUVR3aXJuL2VBS3dQREVneTlCZmxnQ3NqaDR3bUltL0tnS3dBWkxBUmhuM0t5Y0FBRkgrQ2dJZ1NnQUFvZ1FBSUVvQUFLSUVBQ0JLQUFDaUJBQWdTZ0FBb2dRQUlFb0FBS0lFQUNCS0FBQ2lCQUFnU2dBQW9nUUFJRW9BQUtJRUFDQktBQUNpQkFBZ1NnQUFvZ1FBSUVvQUFLSUVBQ0JLQUFDaUJBQWdTZ0FBb2dRQUlFb0FBS0lFQUNCS0FBQ2lCQUFnU2dBQW9nUUFJRW9BQUtJRUFDQktBQUNpQkFBZ1NnQUFvZ1FBSUVvQUFLSUVBQ0JLQUFDaUJBQWdTZ0FBb2dRQUlFb0FBS0lFQUNCS0FBQ2lCQUFnU2dBQW9nUUFJRW9BQUtJRUFDQktBQUNpQkFBZ1NnQUFvZ1FBSUVvQUFLSUVBQ0JLQUFDaUJBQWdTZ0FBb3Y0RmVZVkZBdTlNTk44QUFBQUFTVVZPUks1Q1lJST0iLCAic2l6ZXMiOiAiNTEyeDUxMiIsICJ0eXBlIjogImltYWdlL3BuZyJ9XX0="/>
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAADSUlEQVR4nO3cwakcRxRAUX3hlRZa/TC0cRYCxeGoFIdAWXijMBSEF4KPMDaIf6te1aBzAphpqu687hmm++nd++c38FpvTx8Aj01AJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiCSP04fwP96/vDp9CHc5fu3L6cP4T88XXVjoWh+0T0xXRGQbl7teEmHA5LOEgczOhaQdJY7ktGZb2Hq2eHIqk5PIOkMmBxFoxNIPTMm13kuIPVMGlvtoYDUM29mzScCUs8pAyu/PSD1nLV7/fcGpJ4bbN2FjQGp5x779sLfOUh2BWT83GbTjmwJSD132rEvTmEk6wMyfm62fHdMIJLFARk/91u7RyYQiYBIVgbk/PUoFu7UvfeFDfj76+dVL/Xnx79WvdRjcQojERDJsoBcAD2WVftlApEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgkuuekbjwuYWTJg/7qucxmkAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiI5LobCyfvmlt4N+BVN/tNMoFIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREMmygL5/+7LqpRiwar9MIBIBkVz3jMRJv+2DDRdaOYFcBj2KhTvlFEYiIJLFATmL3W/tHplAJOsDMoRutnx3TCCSLQEZQnfasS+7JpCGbrNpR5zCSDYGZAjdY99e7J1AGrrB1l3YfgrT0Fm713/iGkhDpwys/NBFtIbmzaz53LcwDU0aW+3Rr/EamjG5zk/v3j+PvdmL5w+f5t/0dzD/ET3zQ6JRtMORVT0zgV4YRUsc/EAeDugHGb3a8Vl+RUAvlPSLjnfz4q6Afiamf7knmp/dGxAPwd85SAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAk/wCdmoVtOJV6ygAAAABJRU5ErkJggg=="/>
+<title>Prevención IAAS</title>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body,#root{height:100%;overscroll-behavior:none;background:#0A0E14}
+:root{--bg:#0A0E14;--s1:#0F1621;--s2:#161E2C;--b1:#1E2D42;--b2:#253650;--t1:#EDF2FA;--t2:#8BA0BE;--t3:#4A607A;--safe-t:env(safe-area-inset-top,0px);--safe-b:env(safe-area-inset-bottom,0px)}
+.app{width:100%;max-width:430px;margin:0 auto;min-height:100vh;min-height:100dvh;background:var(--bg);color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;display:flex;flex-direction:column}
+.hdr{background:var(--s1);border-bottom:1px solid var(--b1);padding:14px 16px;padding-top:calc(14px + var(--safe-t));display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:200;flex-shrink:0}
+.hdr-logo{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.hdr-title{font-size:15px;font-weight:800;line-height:1.2}
+.hdr-sub{font-size:11px;color:var(--t2);margin-top:1px}
+.hdr-back{margin-left:auto;background:var(--s2);border:1px solid var(--b2);color:var(--t2);padding:8px 14px;border-radius:10px;font-size:13px;cursor:pointer;flex-shrink:0;font-family:inherit}
+.bnav{background:var(--s1);border-top:1px solid var(--b1);display:flex;padding-bottom:var(--safe-b);position:sticky;bottom:0;z-index:200;flex-shrink:0}
+.bnav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 4px;cursor:pointer;gap:3px;border:none;background:transparent;color:var(--t3);transition:color .15s}
+.bnav-item.on{color:#4A90D9}
+.bnav-icon{font-size:20px;line-height:1}
+.bnav-lbl{font-size:10px;font-weight:700}
+.body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.page{padding:16px 14px 24px}
+.card{background:var(--s1);border:1px solid var(--b1);border-radius:16px;padding:16px;margin-bottom:12px}
+.card-accent{border-left:3px solid}
+.sec-title{font-size:10px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px}
+.fld{margin-bottom:12px}
+.fld label{display:block;font-size:11px;color:var(--t2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em}
+.fld input,.fld select{width:100%;background:var(--bg);border:1.5px solid var(--b2);border-radius:12px;color:var(--t1);padding:14px 16px;font-size:16px;font-family:inherit;outline:none;transition:border-color .15s;appearance:none;-webkit-appearance:none}
+.fld input:focus,.fld select:focus{border-color:#4A90D9}
+.fld select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%238BA0BE' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:42px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.crit{display:flex;align-items:flex-start;gap:12px;padding:14px 0;border-bottom:1px solid var(--b1)}
+.crit:last-child{border-bottom:none;padding-bottom:0}
+.cnum{font-size:12px;color:var(--t3);font-weight:700;min-width:20px;margin-top:2px;flex-shrink:0}
+.ctxt{font-size:14px;color:#C8D8EE;line-height:1.5;flex:1}
+.cbtns{display:flex;gap:8px;flex-shrink:0}
+.cbtn{width:44px;height:44px;border-radius:12px;border:none;cursor:pointer;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;transition:all .12s;-webkit-appearance:none}
+.csi{background:#0C1F1A;color:#3FB950}
+.csi.on{background:#163326;color:#4ADE80;box-shadow:0 0 0 2px #3FB950}
+.cno{background:#1F0C0C;color:#6B3030}
+.cno.on{background:#321A1A;color:#F87171;box-shadow:0 0 0 2px #F85149}
+.chip{display:inline-flex;align-items:center;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700}
+.btn{width:100%;padding:17px;border:none;border-radius:14px;color:#fff;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit;letter-spacing:.02em;transition:transform .1s,opacity .1s;-webkit-appearance:none}
+.btn:active{transform:scale(.97);opacity:.9}
+.btn-ghost{width:100%;padding:15px;background:transparent;border:1.5px solid var(--b2);border-radius:14px;color:var(--t2);font-size:15px;cursor:pointer;font-family:inherit;margin-top:10px;-webkit-appearance:none}
+.btn2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.btn-xl{padding:17px 10px;border:none;border-radius:14px;color:#fff;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;-webkit-appearance:none;transition:transform .1s;text-align:center}
+.btn-xl:active{transform:scale(.97)}
+.btn-green{background:linear-gradient(135deg,#166534,#22C55E)}
+.btn-red{background:linear-gradient(135deg,#991B1B,#EF4444)}
+.pac-row{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}
+.ppill{padding:9px 14px;border-radius:20px;font-size:13px;font-weight:700;cursor:pointer;border:2px solid;background:transparent;transition:all .15s;-webkit-appearance:none;font-family:inherit}
+.ppill:active{transform:scale(.95)}
+.ppill.active-p{color:#fff!important}
+.ppill.empty{opacity:.35}
+.p-add{padding:9px 14px;border-radius:20px;font-size:13px;font-weight:700;cursor:pointer;border:2px dashed var(--b2);color:var(--t2);background:transparent;-webkit-appearance:none;font-family:inherit}
+.ced{background:var(--s1);border:1.5px solid var(--b1);border-left:4px solid;border-radius:16px;padding:18px;margin-bottom:12px;cursor:pointer;display:flex;align-items:center;gap:14px;transition:transform .1s}
+.ced:active{transform:scale(.98)}
+.ced-ico{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0}
+.ced-lbl{font-size:16px;font-weight:800}
+.ced-sub{font-size:12px;color:var(--t2);margin-top:4px;line-height:1.4}
+.ced-arr{margin-left:auto;color:var(--t3);font-size:22px;flex-shrink:0}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.sbox{background:var(--s1);border:1px solid var(--b1);border-radius:14px;padding:14px 8px;text-align:center}
+.snum{font-size:24px;font-weight:800}
+.slbl{font-size:10px;color:var(--t3);margin-top:3px;text-transform:uppercase;letter-spacing:.04em}
+.hero{text-align:center;padding:32px 16px 20px}
+.hero-ico{font-size:60px;margin-bottom:16px}
+.hero-t{font-size:22px;font-weight:800;margin-bottom:10px;line-height:1.2}
+.hero-s{font-size:14px;color:var(--t2);line-height:1.7;max-width:300px;margin:0 auto}
+.hitem{background:var(--s2);border:1px solid var(--b1);border-radius:14px;padding:14px;margin-bottom:10px;display:flex;align-items:center;gap:12px}
+.hi-info{flex:1;min-width:0}
+.hi-t{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hi-s{font-size:12px;color:var(--t2);margin-top:3px}
+.pac-sum{display:flex;align-items:center;padding:10px 0;border-bottom:1px solid var(--b1)}
+.pac-sum:last-child{border-bottom:none}
+.err-box{background:#200A0A;border:1px solid #F85149;border-radius:12px;padding:12px 16px;font-size:13px;color:#F87171;margin-bottom:12px}
+.install-banner{background:linear-gradient(135deg,#1E3A5F,#0D2137);border:1px solid #2E75B6;border-radius:14px;padding:14px 16px;margin-bottom:12px;display:flex;align-items:center;gap:12px}
+.install-banner button{background:#2E75B6;border:none;border-radius:10px;color:#fff;padding:8px 14px;font-size:13px;cursor:pointer;font-weight:700;white-space:nowrap;flex-shrink:0;font-family:inherit}
+.result-card{background:var(--s1);border:1px solid var(--b1);border-radius:16px;padding:20px;margin-bottom:12px;text-align:center}
+.big-pct{font-size:56px;font-weight:800;line-height:1}
+.nivel-badge{display:inline-block;padding:6px 18px;border-radius:20px;font-size:13px;font-weight:700;margin-top:8px}
+@keyframes up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.up{animation:up .3s ease both}
+
+.pin-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;min-height:100dvh;background:#0A0E14;padding:32px 24px;text-align:center}
+.pin-logo{font-size:64px;margin-bottom:20px}
+.pin-title{font-size:22px;font-weight:800;color:#EDF2FA;margin-bottom:8px}
+.pin-sub{font-size:14px;color:#8BA0BE;margin-bottom:32px;line-height:1.6}
+.pin-dots{display:flex;gap:14px;justify-content:center;margin-bottom:32px}
+.pin-dot{width:18px;height:18px;border-radius:50%;border:2px solid #253650;background:transparent;transition:all .15s}
+.pin-dot.filled{background:#4A90D9;border-color:#4A90D9}
+.pin-dot.error{background:#F85149;border-color:#F85149;animation:shake .3s ease}
+.pin-pad{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:100%;max-width:280px}
+.pin-btn{height:72px;border:1.5px solid #1E2D42;border-radius:16px;background:#0F1621;color:#EDF2FA;font-size:24px;font-weight:700;cursor:pointer;transition:all .1s;-webkit-appearance:none;font-family:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.pin-btn:active{background:#1C2E45;transform:scale(.94)}
+.pin-btn-sub{font-size:9px;color:#4A607A;letter-spacing:.08em;font-weight:400}
+.pin-del{font-size:20px}
+.pin-err{font-size:13px;color:#F87171;margin-top:-20px;margin-bottom:8px;min-height:20px}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+</style>
+</head>
+<body>
+<div id="root">
+  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;background:#0A0E14;color:#EDF2FA;gap:16px">
+    <div style="font-size:56px">🛡️</div>
+    <div style="font-size:18px;font-weight:800">Prevención IAAS</div>
+    <div style="font-size:14px;color:#8BA0BE">Cargando...</div>
+    <div style="width:40px;height:40px;border-radius:50%;border:3px solid #1E2D42;border-top-color:#4A90D9;animation:spin .8s linear infinite"></div>
+    <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
+  </div>
+</div>
+<script>
+if("serviceWorker"in navigator){const sw=`self.addEventListener("install",e=>self.skipWaiting());self.addEventListener("activate",e=>clients.claim());self.addEventListener("fetch",e=>e.respondWith(fetch(e.request).catch(()=>new Response(""))));`;const blob=new Blob([sw],{type:"text/javascript"});navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(()=>{});}
+</script>
+<script>
+
+const {useState,useEffect} = React;
+
+const CEDULAS={
+  ITS:{id:"ITS",label:"ITS",color:"#E05C5C",icon:"🩸",fullLabel:"Infección del Torrente Sanguíneo — CVC",tieneNombre:true,tieneNacimiento:true,tieneId:false,tieneGenero:false,tieneNo:false,
+    criterios:["Registro diario de condiciones del catéter (punto de inserción sin retirar apósito)","Curación del catéter con técnica aséptica y cambio de apósito según normatividad","Técnica correcta al interrumpir conexión con uso de desinfectante (alcohol 70%)","Cambio de sistema de infusión según tipo de solución","Evaluación diaria de permanencia o retiro del CVC (nota de evolución)","Registro de días de instalación del catéter"]},
+  IVU:{id:"IVU",label:"IVU",color:"#F5A623",icon:"🚿",fullLabel:"Infección de Vías Urinarias — Catéter Urinario",tieneNombre:true,tieneNacimiento:true,tieneId:true,tieneGenero:true,tieneNo:false,
+    criterios:["Catéter vesical con membrete de identificación","Catéter vesical fijo de acuerdo al sexo del paciente","Higiene de genitales diaria con agua y jabón mientras está instalado","Línea de drenaje libre de obstrucción","Bolsa colectora por debajo del nivel de la vejiga, sin tocar el suelo","Sistema sin desconexiones en todo momento","Evaluación diaria de permanencia o retiro del catéter urinario","Registro diario de características macroscópicas de la orina","Registro de días de instalación del catéter"]},
+  NAVM:{id:"NAVM",label:"NAVM",color:"#4A90D9",icon:"🫁",fullLabel:"Neumonía Asociada a Ventilación Mecánica",tieneNombre:true,tieneNacimiento:true,tieneId:true,tieneGenero:false,tieneNo:false,
+    criterios:["Intubación con equipo desinfectado y adecuadamente resguardado","Posición de cama 30°-45° (adultos/niños) o 10°-15° (neonatos) según patología","Médico evalúa y registra diariamente la posible interrupción de sedación","Médico evalúa y registra diariamente la posibilidad de retiro de ventilación","Aspiración de secreciones endotraqueales con sistema cerrado","Higiene oral con SSN 0.9% (adultos) / agua bidestilada (neonatos) cada 6-8 hrs","Uso de humedad activa o pasiva según características del equipo"]},
+  ISQ:{id:"ISQ",label:"ISQ",color:"#00C9A7",icon:"🔪",fullLabel:"Infección de Sitio Quirúrgico",tieneNombre:true,tieneNacimiento:true,tieneId:true,tieneGenero:false,tieneNo:false,
+    criterios:["Profilaxis antimicrobiana prequirúrgica en tiempo y forma (60 min previo a incisión)","Eliminación de vello con cortadora eléctrica o tijeras (NO rastrillos) 20-30 min antes","Glucosa en sangre pre, trans y 24 hrs posoperatorio (nota médica)","Temperatura corporal > 35.5°C (hipotermia en cx cardiacas como parte del procedimiento)","Herida sellada con apósito intacto primeras 48 hrs postquirúrgicas","Clasificación de herida quirúrgica en expediente (nota posoperatoria)"]},
+  Antisepticos:{id:"Antisepticos",label:"Antisépticos",color:"#A78BFA",icon:"🧴",fullLabel:"Vigilancia de Antisépticos",tieneNombre:false,tieneNacimiento:false,tieneId:false,tieneGenero:false,tieneNo:true,
+    criterios:["Etiquetado del frasco: fecha de envasado, caducidad y apertura","Distribución en frascos según características del antiséptico","Dotación de antisépticos máximo cada 24 hrs","Antiséptico desechado después de 24 hrs de apertura del frasco"]}
+};
+
+const TURNOS=["Matutino","Vespertino","Nocturno","Jornada Acumulada"];
+const MAX_P=10;
+const getTasaColor=t=>t===null?"#4A5568":t>=85?"#3FB950":t>=60?"#F5A623":"#F85149";
+const getTasaBg=t=>t===null?"#1A2030":t>=85?"#0F2420":t>=60?"#2A1F00":"#2A0A0A";
+const getNivel=t=>t>=85?"✅ Aceptable":t>=60?"⚠️ En riesgo":"🔴 Crítico";
+const calcTasa=(p,n)=>{const v=Array.from({length:n},(_,i)=>p[`c${i+1}`]??null).filter(v=>v!==null);if(!v.length)return null;return Math.round(v.filter(v=>v===true).length/v.length*100);};
+const pacVacio=ced=>{const p={fecha:new Date().toISOString().split("T")[0],turno:"",servicio:"",nombre:"",nacimiento:"",genero:"",id_pac:"",no:""};ced.criterios.forEach((_,i)=>{p[`c${i+1}`]=null;});return p;};
+
+const exportExcel=(ced,pacs,entidad,unidad)=>{
+  const nc=ced.criterios.length;const aoa=[];
+  const titulos={ITS:"Paquete: ITS — Infección del Torrente Sanguíneo (CVC)",IVU:"Paquete: IVU — Infecciones de Vías Urinarias (Catéter Urinario)",NAVM:"Paquete: NAVM — Neumonía Asociada a Ventilación Mecánica",ISQ:"Paquete: ISQ — Infección de Sitio Quirúrgico",Antisepticos:"Manejo de Antisépticos en Hospitalización y Áreas Críticas"};
+  aoa.push(["CÉDULA DE SUPERVISIÓN IAAS — PREVENCIÓN Y CONTROL DE INFECCIONES ASOCIADAS A LA ATENCIÓN A LA SALUD"]);
+  aoa.push([titulos[ced.id]]);
+  aoa.push([`Entidad Federativa: ${entidad||""}     Unidad Médica: ${unidad||""}     Fecha: ${new Date().toLocaleDateString("es-MX")}`]);
+  aoa.push([""]);
+  const hdrs=[];
+  if(ced.tieneNo)hdrs.push("No.");
+  hdrs.push("FECHA","TURNO","SERVICIO");
+  if(ced.tieneGenero)hdrs.push("GÉNERO\n(1=Mujer 2=Hombre)");
+  if(ced.tieneNombre)hdrs.push("NOMBRE COMPLETO");
+  if(ced.tieneNacimiento)hdrs.push("FECHA NACIMIENTO");
+  if(ced.tieneId)hdrs.push("ID PACIENTE\n(NSS/RFC/Exp.)");
+  ced.criterios.forEach((c,i)=>hdrs.push(`${i+1}. ${c.toUpperCase()}`));
+  hdrs.push("% CUMPLIMIENTO");
+  aoa.push(hdrs);
+  for(let i=0;i<MAX_P;i++){
+    const p=pacs[i]||{};const row=[];
+    if(ced.tieneNo)row.push(p.no||(i+1));
+    row.push(p.fecha||"",p.turno||"",p.servicio||"");
+    if(ced.tieneGenero)row.push(p.genero||"");
+    if(ced.tieneNombre)row.push(p.nombre||"");
+    if(ced.tieneNacimiento)row.push(p.nacimiento||"");
+    if(ced.tieneId)row.push(p.id_pac||"");
+    for(let j=1;j<=nc;j++){const v=p[`c${j}`];row.push(v===true?"SI":v===false?"NO":"");}
+    const t=calcTasa(p,nc);row.push(t!==null?`${t}%`:"");
+    aoa.push(row);
+  }
+  const tasas=pacs.map(p=>calcTasa(p,nc)).filter(t=>t!==null);
+  const tot=Array(hdrs.length).fill("");
+  tot[0]="% CUMPLIMIENTO GENERAL";
+  if(tasas.length)tot[hdrs.length-1]=`${Math.round(tasas.reduce((a,b)=>a+b)/tasas.length)}%`;
+  aoa.push(tot);
+  aoa.push([""]);
+  aoa.push(["SI = Cumple   |   NO = No cumple   |   (vacío) = No observado"]);
+  const ws=XLSX.utils.aoa_to_sheet(aoa);
+  ws["!cols"]=hdrs.map(h=>({wch:h==="FECHA"||h==="TURNO"?11:h==="SERVICIO"?18:h.includes("NOMBRE")?26:h.includes("NACIMIENTO")?13:h.includes("ID")?15:h.includes("GÉNERO")?12:h.includes("CUMPLIMIENTO")?14:h==="No."?5:18}));
+  const wb=XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb,ws,ced.label);
+  XLSX.writeFile(wb,`Cedula_${ced.id}_${new Date().toISOString().split("T")[0]}.xlsx`);
+};
+
+const exportPDF=(ced,pacs,entidad,unidad)=>{
+  const nc=ced.criterios.length;
+  const tasas=pacs.map(p=>calcTasa(p,nc)).filter(t=>t!==null);
+  const tg=tasas.length?Math.round(tasas.reduce((a,b)=>a+b)/tasas.length):null;
+  const tc=tg>=85?"#27AE60":tg>=60?"#E67E22":"#E74C3C";
+  const filas=pacs.map((p,i)=>{
+    const t=calcTasa(p,nc);if(t===null)return"";
+    const col=t>=85?"#27AE60":t>=60?"#E67E22":"#E74C3C";
+    const crits=Array.from({length:nc},(_,j)=>{const v=p[`c${j+1}`];return`<td style="text-align:center;font-weight:700;color:${v===true?"#27AE60":v===false?"#E74C3C":"#bbb"};font-size:10px;padding:5px 3px;background:${v===true?"#EAF7ED":v===false?"#FDECEA":"#fff"}">${v===true?"SI":v===false?"NO":""}</td>`;}).join("");
+    return`<tr><td style="padding:6px 8px;font-size:11px;font-weight:600;background:${i%2?"#f9f9f9":"#fff"}">P${i+1}${p.nombre?`<br><span style='font-weight:400;color:#666'>${p.nombre}</span>`:""}</td><td style="padding:5px 4px;font-size:10px;color:#555;background:${i%2?"#f9f9f9":"#fff"}">${p.fecha||""}</td><td style="padding:5px 4px;font-size:10px;color:#555;background:${i%2?"#f9f9f9":"#fff"}">${p.turno||""}</td><td style="padding:5px 4px;font-size:10px;color:#555;background:${i%2?"#f9f9f9":"#fff"}">${p.servicio||""}</td>${crits}<td style="text-align:center;font-weight:800;color:${col};font-size:12px;background:${i%2?"#f9f9f9":"#fff"}">${t}%</td></tr>`;
+  }).join("");
+  const html=`<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"/><title>Cédula IAAS — ${ced.label}</title>
+  <style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:Arial,sans-serif;padding:24px;font-size:12px;color:#222}
+  .h1{background:#1F3864;color:#fff;padding:9px 14px;font-size:11px;font-weight:700;text-align:center}
+  .h2{background:#2E75B6;color:#fff;padding:7px 14px;font-size:10px;text-align:center;margin-bottom:16px}
+  .meta{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:14px;font-size:11px;padding:10px 12px;background:#f5f5f5;border-radius:6px}
+  .meta span{color:#444}.meta b{color:#111}
+  .pct-box{text-align:right;padding:10px 14px;background:#2E75B6;color:#fff;border-radius:6px;margin-bottom:14px}
+  .pct-num{font-size:32px;font-weight:800}
+  .pct-lbl{font-size:11px;opacity:.8}
+  table{width:100%;border-collapse:collapse;margin-bottom:16px;font-size:10px}
+  th{background:#1F3864;color:#fff;padding:7px 5px;text-align:center;font-size:9px;border:1px solid #163060}
+  td{border:1px solid #ddd}
+  .tot-row td{background:#2E75B6!important;color:#fff!important;font-weight:700;padding:8px;text-align:right;font-size:11px}
+  .crit-key{font-size:9px;color:#666;margin-bottom:16px;line-height:1.6}
+  .foot{font-size:9px;color:#aaa;text-align:center;padding-top:10px;border-top:1px solid #eee;margin-top:16px}
+  @media print{body{padding:12px}}</style>
+  </head><body>
+  <div class="h1">CÉDULA DE SUPERVISIÓN — PREVENCIÓN Y CONTROL DE INFECCIONES IAAS</div>
+  <div class="h2">${ced.fullLabel}</div>
+  <div style="display:flex;gap:12px;margin-bottom:14px;align-items:flex-start">
+    <div class="meta" style="flex:1">
+      <span>Entidad: <b>${entidad||"—"}</b></span>
+      <span>Unidad: <b>${unidad||"—"}</b></span>
+      <span>Fecha: <b>${new Date().toLocaleDateString("es-MX",{day:"2-digit",month:"long",year:"numeric"})}</b></span>
+      <span>Pacientes evaluados: <b>${pacs.filter(p=>calcTasa(p,nc)!==null).length}</b></span>
+    </div>
+    <div class="pct-box"><div class="pct-num" style="color:${tc}">${tg!==null?`${tg}%`:"—"}</div><div class="pct-lbl">Cumplimiento general</div></div>
+  </div>
+  <table><thead><tr>
+    <th style="text-align:left;min-width:80px">Paciente</th>
+    <th>Fecha</th><th>Turno</th><th>Servicio</th>
+    ${ced.criterios.map((_,i)=>`<th style="min-width:30px">${i+1}</th>`).join("")}
+    <th>%</th>
+  </tr></thead><tbody>
+  ${filas}
+  <tr class="tot-row"><td colspan="4">% CUMPLIMIENTO GENERAL</td>${ced.criterios.map(()=>'<td style="background:#2E75B6!important;border-color:#1A4A8A"></td>').join("")}<td>${tg!==null?`${tg}%`:"—"}</td></tr>
+  </tbody></table>
+  <div class="crit-key"><b>Clave de criterios:</b><br>${ced.criterios.map((c,i)=>`${i+1}. ${c}`).join("<br>")}</div>
+  <div class="foot">Prevención de Infecciones IAAS · ${new Date().toLocaleDateString("es-MX",{day:"2-digit",month:"long",year:"numeric"})}</div>
+  </body></html>`;
+  const w=window.open("","_blank");
+  w.document.write(html);w.document.close();w.focus();
+  setTimeout(()=>w.print(),700);
+};
+
+function App(){
+  const [vista,setVista]=useState("home");
+  const [navTab,setNavTab]=useState("cedulas");
+  const [cedId,setCedId]=useState(null);
+  const [pacs,setPacs]=useState([]);
+  const [pi,setPi]=useState(0);
+  const [entidad,setEntidad]=useState("");
+  const [unidad,setUnidad]=useState("");
+  const [hist,setHist]=useState(()=>{try{return JSON.parse(localStorage.getItem("iaas_hist")||"[]")}catch{return[]}});
+  const [xlLoad,setXlLoad]=useState(false);
+  const [deferredPrompt,setDeferredPrompt]=useState(null);
+  const [showInstall,setShowInstall]=useState(false);
+
+  useEffect(()=>{
+    const h=e=>{e.preventDefault();setDeferredPrompt(e);setShowInstall(true);};
+    window.addEventListener("beforeinstallprompt",h);
+    return()=>window.removeEventListener("beforeinstallprompt",h);
+  },[]);
+
+  useEffect(()=>{
+    try{localStorage.setItem("iaas_hist",JSON.stringify(hist.slice(0,20)));}catch{}
+  },[hist]);
+
+  const ced=cedId?CEDULAS[cedId]:null;
+  const pac=pacs[pi]||{};
+  const nc=ced?ced.criterios.length:0;
+  const tasaP=p=>ced?calcTasa(p,nc):null;
+  const tasaAll=()=>{const ts=pacs.map(p=>tasaP(p)).filter(t=>t!==null);return ts.length?Math.round(ts.reduce((a,b)=>a+b)/ts.length):null;};
+  const hasDatos=p=>ced&&ced.criterios.some((_,i)=>p[`c${i+1}`]!==null);
+
+  const iniciar=id=>{setCedId(id);setPacs([pacVacio(CEDULAS[id])]);setPi(0);setVista("form");};
+  const addPac=()=>{if(pacs.length>=MAX_P)return;const n=[...pacs,pacVacio(ced)];setPacs(n);setPi(n.length-1);};
+  const delPac=idx=>{if(pacs.length===1)return;const n=pacs.filter((_,i)=>i!==idx);setPacs(n);setPi(Math.min(idx,n.length-1));};
+  const upd=(k,v)=>setPacs(prev=>{const n=[...prev];n[pi]={...n[pi],[k]:v};return n;});
+  const mark=(i,v)=>{const k=`c${i+1}`;upd(k,pac[k]===v?null:v);};
+
+  const instalar=async()=>{if(!deferredPrompt)return;deferredPrompt.prompt();const{outcome}=await deferredPrompt.userChoice;if(outcome==="accepted")setShowInstall(false);setDeferredPrompt(null);};
+
+  const finalizar=()=>{
+    const con=pacs.filter(hasDatos);
+    if(!con.length)return;
+    const tg=tasaAll();
+    setHist(prev=>[{id:Date.now(),cedId,icon:ced.icon,color:ced.color,fullLabel:ced.fullLabel,unidad:unidad||"—",entidad:entidad||"—",fecha:new Date().toLocaleDateString("es-MX"),tasa:tg,n:con.length,pacs:[...pacs]},...prev.slice(0,19)]);
+    setVista("result");
+  };
+
+  const volver=()=>{setCedId(null);setPacs([]);setVista("home");};
+
+  // HOME
+  if(vista==="home")return(
+    <div className="app">
+      <div className="hdr">
+        <div className="hdr-logo" style={{background:"linear-gradient(135deg,#1E3A5F,#0D2137)"}}>🛡️</div>
+        <div><div className="hdr-title">Prevención IAAS</div><div className="hdr-sub">Auditorías de Cumplimiento</div></div>
+      </div>
+      <div className="body"><div className="page">
+        {showInstall&&<div className="install-banner up">
+          <div style={{flex:1}}><div style={{fontSize:14,fontWeight:700,marginBottom:3}}>📲 Instalar app</div><div style={{fontSize:12,color:"var(--t2)"}}>Agrégala a tu pantalla de inicio</div></div>
+          <button onClick={instalar}>Instalar</button>
+          <button onClick={()=>setShowInstall(false)} style={{background:"transparent",border:"none",color:"var(--t3)",fontSize:20,cursor:"pointer",padding:"2px 6px"}}>✕</button>
+        </div>}
+        {navTab==="cedulas"&&<>
+          <div className="hero up">
+            <div className="hero-ico">🏥</div>
+            <div className="hero-t">Auditorías IAAS</div>
+            <div className="hero-s">Selecciona una cédula, registra hasta 10 pacientes y exporta el Excel oficial.</div>
+          </div>
+          {Object.values(CEDULAS).map((c,i)=>(
+            <div key={c.id} className="ced up" style={{animationDelay:`${i*.05}s`,borderLeftColor:c.color}} onClick={()=>iniciar(c.id)}>
+              <div className="ced-ico" style={{background:`${c.color}18`}}>{c.icon}</div>
+              <div style={{flex:1,minWidth:0}}>
+                <div className="ced-lbl" style={{color:c.color}}>{c.label}</div>
+                <div className="ced-sub">{c.fullLabel}</div>
+                <div className="ced-sub" style={{marginTop:4,color:"var(--t3)"}}>{c.criterios.length} criterios · hasta {MAX_P} pacientes</div>
+              </div>
+              <div className="ced-arr">›</div>
+            </div>
+          ))}
+        </>}
+        {navTab==="historial"&&<>
+          {!hist.length
+            ?<div style={{textAlign:"center",padding:"60px 20px",color:"var(--t3)"}}>
+                <div style={{fontSize:48,marginBottom:14}}>📋</div>
+                <div style={{fontSize:15,fontWeight:600}}>Sin auditorías aún</div>
+                <div style={{fontSize:13,marginTop:6}}>Completa una cédula para ver el historial</div>
+              </div>
+            :hist.map(h=>(
+              <div key={h.id} className="hitem up">
+                <div style={{fontSize:24}}>{h.icon}</div>
+                <div className="hi-info"><div className="hi-t">{h.fullLabel}</div><div className="hi-s">{h.unidad} · {h.fecha} · {h.n} pacs.</div></div>
+                <div className="chip" style={{background:getTasaBg(h.tasa),color:getTasaColor(h.tasa),marginRight:6,flexShrink:0}}>{h.tasa}%</div>
+                <button style={{background:"#166534",border:"none",borderRadius:10,color:"#fff",padding:"9px 11px",fontSize:14,cursor:"pointer",fontWeight:700,flexShrink:0}} onClick={()=>exportExcel(CEDULAS[h.cedId],h.pacs,h.entidad,h.unidad)}>📊</button>
+              </div>
+            ))
+          }
+        </>}
+      </div></div>
+      <div className="bnav">
+        <button className={`bnav-item${navTab==="cedulas"?" on":""}`} onClick={()=>setNavTab("cedulas")}><span className="bnav-icon">📋</span><span className="bnav-lbl">Cédulas</span></button>
+        <button className={`bnav-item${navTab==="historial"?" on":""}`} onClick={()=>setNavTab("historial")}><span className="bnav-icon">🕐</span><span className="bnav-lbl">Historial</span></button>
+      </div>
+    </div>
+  );
+
+  // FORM
+  if(vista==="form"&&ced){
+    const t=tasaP(pac),tc=getTasaColor(t),tg=tasaAll();
+    return(<div className="app">
+      <div className="hdr" style={{borderBottomColor:ced.color+"44"}}>
+        <div className="hdr-logo" style={{background:`${ced.color}20`,fontSize:22}}>{ced.icon}</div>
+        <div><div className="hdr-title" style={{color:ced.color}}>{ced.label}</div><div className="hdr-sub">{ced.fullLabel}</div></div>
+        <button className="hdr-back" onClick={volver}>← Salir</button>
+      </div>
+      <div className="body"><div className="page">
+        <div className="card up">
+          <div className="sec-title">Establecimiento</div>
+          <div className="fld"><label>Entidad Federativa</label><input placeholder="Ej: Morelos" value={entidad} onChange={e=>setEntidad(e.target.value)}/></div>
+          <div className="fld"><label>Unidad Médica</label><input placeholder="Nombre de la unidad" value={unidad} onChange={e=>setUnidad(e.target.value)}/></div>
+        </div>
+        <div className="card up" style={{animationDelay:".05s"}}>
+          <div style={{display:"flex",alignItems:"center",marginBottom:14}}>
+            <div className="sec-title" style={{margin:0}}>Pacientes</div>
+            <div className="chip" style={{marginLeft:"auto",background:getTasaBg(tg),color:getTasaColor(tg)}}>{tg!==null?`${tg}% general`:"Sin datos"}</div>
+          </div>
+          <div className="pac-row">
+            {pacs.map((p,i)=>{const t2=tasaP(p);const done=hasDatos(p);const isAct=i===pi;
+              return<button key={i} className={`ppill${done?" done":""} ${isAct?" active-p":""}`}
+                style={{borderColor:isAct?ced.color:done?getTasaColor(t2):"var(--b2)",color:isAct?"#fff":done?getTasaColor(t2):"var(--t2)",background:isAct?ced.color:"transparent"}}
+                onClick={()=>setPi(i)}>P{i+1}{done&&t2!==null?` ${t2}%`:""}</button>;
+            })}
+            {pacs.length<MAX_P&&<button className="p-add" onClick={addPac}>＋ Paciente</button>}
+          </div>
+          <div style={{fontSize:12,color:"var(--t3)"}}>{pacs.filter(hasDatos).length} de {MAX_P} pacientes con datos</div>
+        </div>
+        <div className="card card-accent up" style={{animationDelay:".1s",borderLeftColor:ced.color}}>
+          <div style={{display:"flex",alignItems:"center",marginBottom:14}}>
+            <div className="sec-title" style={{margin:0,color:ced.color}}>Paciente {pi+1}</div>
+            {pacs.length>1&&<button style={{marginLeft:"auto",background:"#321A1A",border:"none",borderRadius:8,color:"#F87171",padding:"7px 12px",fontSize:12,cursor:"pointer",fontWeight:700}} onClick={()=>delPac(pi)}>🗑 Quitar</button>}
+          </div>
+          <div className="g2">
+            <div className="fld"><label>Fecha</label><input type="date" value={pac.fecha||""} onChange={e=>upd("fecha",e.target.value)}/></div>
+            <div className="fld"><label>Turno</label>
+              <select value={pac.turno||""} onChange={e=>upd("turno",e.target.value)}>
+                <option value="">Turno</option>{TURNOS.map(t=><option key={t}>{t}</option>)}
+              </select>
+            </div>
+          </div>
+          {ced.tieneNo&&<div className="fld"><label>No.</label><input type="number" placeholder="Consecutivo" value={pac.no||""} onChange={e=>upd("no",e.target.value)}/></div>}
+          <div className="fld"><label>Servicio / Unidad</label><input placeholder="Ej: UCI, Cirugía..." value={pac.servicio||""} onChange={e=>upd("servicio",e.target.value)}/></div>
+          {ced.tieneGenero&&<div className="fld"><label>Género</label>
+            <select value={pac.genero||""} onChange={e=>upd("genero",e.target.value)}>
+              <option value="">Seleccionar</option><option value="1">1 — Mujer</option><option value="2">2 — Hombre</option>
+            </select></div>}
+          {ced.tieneNombre&&<div className="fld"><label>Nombre Completo</label><input placeholder="Apellidos, Nombre(s)" value={pac.nombre||""} onChange={e=>upd("nombre",e.target.value)}/></div>}
+          <div className="g2">
+            {ced.tieneNacimiento&&<div className="fld"><label>Nacimiento</label><input type="date" value={pac.nacimiento||""} onChange={e=>upd("nacimiento",e.target.value)}/></div>}
+            {ced.tieneId&&<div className="fld"><label>NSS / RFC / Exp.</label><input placeholder="ID" value={pac.id_pac||""} onChange={e=>upd("id_pac",e.target.value)}/></div>}
+          </div>
+        </div>
+        <div className="card up" style={{animationDelay:".15s"}}>
+          <div style={{display:"flex",alignItems:"center",marginBottom:16}}>
+            <div className="sec-title" style={{margin:0}}>Criterios · P{pi+1}</div>
+            <div className="chip" style={{marginLeft:"auto",background:getTasaBg(t),color:tc}}>{t!==null?`${t}%`:"Sin obs."}</div>
+          </div>
+          {ced.criterios.map((c,i)=>{const v=pac[`c${i+1}`];return(
+            <div key={i} className="crit">
+              <div className="cnum">{i+1}</div><div className="ctxt">{c}</div>
+              <div className="cbtns">
+                <button className={`cbtn csi${v===true?" on":""}`} onClick={()=>mark(i,true)}>✓</button>
+                <button className={`cbtn cno${v===false?" on":""}`} onClick={()=>mark(i,false)}>✗</button>
+              </div>
+            </div>
+          );})}
+        </div>
+        <button className="btn up" style={{background:`linear-gradient(135deg,${ced.color},${ced.color}AA)`,animationDelay:".2s"}} onClick={finalizar}
+          disabled={!pacs.filter(hasDatos).length}>
+          Ver Resultados →
+        </button>
+        <button className="btn-ghost" onClick={volver}>Cancelar</button>
+      </div></div>
+    </div>);
+  }
+
+  // RESULTADO
+  if(vista==="result"&&ced){
+    const tg=tasaAll();const tc=getTasaColor(tg);const con=pacs.filter(hasDatos);
+    return(<div className="app">
+      <div className="hdr">
+        <div className="hdr-logo" style={{background:`${ced.color}20`,fontSize:22}}>{ced.icon}</div>
+        <div><div className="hdr-title">Resultados</div><div className="hdr-sub">{unidad||"—"} · {con.length} pacientes</div></div>
+        <button className="hdr-back" onClick={volver}>← Inicio</button>
+      </div>
+      <div className="body"><div className="page">
+        <div className="result-card up" style={{borderTop:`4px solid ${tc}`}}>
+          <div className="big-pct" style={{color:tc}}>{tg!==null?`${tg}%`:"—"}</div>
+          <div className="nivel-badge" style={{background:getTasaBg(tg),color:tc}}>{tg!==null?getNivel(tg):"Sin datos"}</div>
+          <div style={{fontSize:12,color:"var(--t2)",marginTop:10}}>{ced.fullLabel}</div>
+        </div>
+        <div className="card up" style={{animationDelay:".06s"}}>
+          <div className="sec-title">Por paciente</div>
+          {pacs.map((p,i)=>{const t2=tasaP(p);if(t2===null)return null;const tc2=getTasaColor(t2);
+            const cumple=ced.criterios.filter((_,j)=>p[`c${j+1}`]===true).length;
+            const total=ced.criterios.filter((_,j)=>p[`c${j+1}`]!==null).length;
+            return<div key={i} className="pac-sum">
+              <div style={{fontSize:13,fontWeight:700,color:ced.color,minWidth:50}}>P{i+1}</div>
+              <div style={{flex:1,minWidth:0}}>
+                <div style={{fontSize:13,color:"var(--t1)",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{p.nombre||p.servicio||"—"}</div>
+                <div style={{fontSize:11,color:"var(--t3)",marginTop:2}}>{cumple}/{total} criterios cumplidos</div>
+              </div>
+              <div className="chip" style={{background:getTasaBg(t2),color:tc2}}>{t2}%</div>
+            </div>;})}
+        </div>
+        <div className="btn2 up" style={{animationDelay:".1s"}}>
+          <button className="btn-xl btn-green" onClick={()=>{setXlLoad(true);exportExcel(ced,pacs,entidad,unidad);setTimeout(()=>setXlLoad(false),1000);}} disabled={xlLoad}>
+            {xlLoad?"⏳...":"📊 Excel"}
+          </button>
+          <button className="btn-xl btn-red" onClick={()=>exportPDF(ced,pacs,entidad,unidad)}>📄 PDF</button>
+        </div>
+        <button className="btn-ghost" onClick={()=>setVista("form")}>← Editar datos</button>
+        <button className="btn-ghost" style={{marginTop:8}} onClick={volver}>Nueva Auditoría</button>
+      </div></div>
+    </div>);
+  }
+  return null;
+}
+
+const PIN_CORRECTO = "0210";
+
+function PinScreen({onOk}){
+  const [digits, setDigits] = React.useState([]);
+  const [error, setError] = React.useState(false);
+  const [errMsg, setErrMsg] = React.useState("");
+
+  const add = d => {
+    if(digits.length >= 4) return;
+    const nuevo = [...digits, d];
+    setDigits(nuevo);
+    setError(false);
+    setErrMsg("");
+    if(nuevo.length === 4){
+      setTimeout(() => {
+        if(nuevo.join("") === PIN_CORRECTO){
+          try{localStorage.setItem("iaas_pin_ok","1");}catch{}
+          onOk();
+        } else {
+          setError(true);
+          setErrMsg("PIN incorrecto. Intenta de nuevo.");
+          setTimeout(() => { setDigits([]); setError(false); }, 800);
+        }
+      }, 120);
+    }
+  };
+
+  const del = () => { setDigits(d => d.slice(0,-1)); setError(false); setErrMsg(""); };
+
+  const pad = [
+    ["1",""],["2","ABC"],["3","DEF"],
+    ["4","GHI"],["5","JKL"],["6","MNO"],
+    ["7","PQRS"],["8","TUV"],["9","WXYZ"],
+    [null,""],[" 0",""],["⌫",""]
+  ];
+
+  return(
+    <div className="pin-screen">
+      <div className="pin-logo">🛡️</div>
+      <div className="pin-title">Prevención IAAS</div>
+      <div className="pin-sub">Ingresa el PIN de acceso</div>
+      <div className="pin-dots">
+        {[0,1,2,3].map(i=>(
+          <div key={i} className={`pin-dot${digits.length>i?" filled":""}${error?" error":""}`}/>
+        ))}
+      </div>
+      <div className="pin-err">{errMsg}</div>
+      <div className="pin-pad">
+        {pad.map(([d,sub],i)=>(
+          d===null ? <div key={i}/> :
+          d==="⌫" ?
+            <button key={i} className="pin-btn" onClick={del}><span className="pin-del">⌫</span></button> :
+            <button key={i} className="pin-btn" onClick={()=>add(d.trim())}>
+              <span>{d.trim()}</span>
+              {sub&&<span className="pin-btn-sub">{sub}</span>}
+            </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function AppConPin(){
+  const [desbloqueado, setDesbloqueado] = React.useState(()=>{
+    try{ return localStorage.getItem("iaas_pin_ok")==="1"; }catch{ return false; }
+  });
+  if(!desbloqueado) return React.createElement(PinScreen, {onOk:()=>setDesbloqueado(true)});
+  return React.createElement(App);
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(AppConPin));
+
+</script>
+</body>
+</html>
